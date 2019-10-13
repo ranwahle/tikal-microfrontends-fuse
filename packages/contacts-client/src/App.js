@@ -8,28 +8,41 @@ function App() {
 
 
     const [contactsList, setContactsList] = useState([]);
+    const [shownObject, setShownObject] = useState('contacts');
     const addContact = async (contact) => {
         await createContact(contact);
       fetchContacts(true);
     }
 
-        const fetchContacts = async (override?) => {
+        const fetchContacts = async (override) => {
             if (!override && contactsList.length) {
                 return;
             }
             const contactsResponse = await getContacts();
-            console.log('contacts', contactsResponse);
+            setShownObject('contacts')
            setContactsList( contactsResponse);
         };
 
       useEffect(() => {
           fetchContacts();
       }, [() => false]);
+
+
   return (
     <div className="App">
 
-        <ContactsList contacts={contactsList} />
-<NewContact addContact={addContact}/>
+        {shownObject === 'newContact' &&
+            <>
+        <a href="javascript:void(0)" onClick={() => setShownObject('contacts')}>Contacts</a>
+        <NewContact addContact={addContact}/>
+        </>}
+
+        {shownObject === 'contacts' &&
+            <>
+                <a href="javascript:void(0)" onClick={() => setShownObject('newContact')}>New contact</a>
+
+                <ContactsList contacts={contactsList} />
+        </>}
 
     </div>
   );
