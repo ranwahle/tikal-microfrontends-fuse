@@ -1,32 +1,31 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {ContactsList} from "./components/ContactsList";
 
 function App() {
 
-    const token = `fqJBbqqwnNAxBWbFTmKLn`;
 
-    const [contacts, setContacts] = useState([]);
+    const [contactsList, setContactsList] = useState([]);
 
         const getContacts = async () => {
-            const response = await  fetch(`http://localhost:3005/contact/${token}`);
+            if (contactsList.length) {
+                return;
+            }
+            const response = await  fetch(`http://localhost:3005/contacts/`);
             const contactsResponse = await response.json();
-
-           setContacts( contactsResponse);
+            console.log('contacts', contactsResponse);
+           setContactsList( contactsResponse);
         };
 
-        getContacts();
+      useEffect(() => {
+          getContacts();
+      }, [() => false]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
 
-      </header>
-        <ContactsList contacts={contacts} />
+        <ContactsList contacts={contactsList} />
+
 
     </div>
   );

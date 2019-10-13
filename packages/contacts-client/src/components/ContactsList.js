@@ -1,12 +1,14 @@
 import React from 'react';
-
+import './contactlist.css';
 
 export const ContactsList = (props) => {
-  return(  <>
-      {props.contacts && props.contacts.map(contact => {
-        return   <div>
-            {contact.name}
-        </div>
+    const {contacts} = props;
+  return(  <ul>
+      {contacts && contacts.map(contact => {
+        return (  <li key={contact.uuid}>
+            {contact.name.first} {contact.name.last}
+            <a href={`mailto:${contact.email}`}>{contact.email}</a>
+        </li>);
       })}
-        </>);
+        </ul>);
 }
