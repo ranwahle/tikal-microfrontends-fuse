@@ -14,7 +14,7 @@ init({
         }
     },
     apps: {
-        contacts: 'http://localhost:3000',
-        todos: 'http://localhost:3001'
+        contacts: 'http://localhost:3007',
+        todos: 'http://localhost:5000'
     }
 })

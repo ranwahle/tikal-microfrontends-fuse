@@ -5,6 +5,8 @@ const nanoid = require('nanoid');
 const getArguments = require('get-arguments-lib');
 const processArguments = getArguments(process.argv);
 const port = +processArguments.port || 3006;
+const cors = require('cors');
+
 
 let database;
 if (fs.existsSync('todos.db.json')) {
@@ -19,7 +21,7 @@ const writeDatabase = () => {
 
 const app = express();
 app.use(bodyParser.json());
-
+app.use(cors());
 app.get('/', (req, res, next) => {
     res.status(200);
     res.send(database);
@@ -31,7 +33,7 @@ app.post('/', (req, res, next) => {
         const body = req.body || {};
         const { title } = body;
         if (!title) {
-            throw new Error('No title');
+            throw new Error('No title', JSON.stringify(body));
         }
         database.push({
             title,
