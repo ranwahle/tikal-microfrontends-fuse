@@ -1,19 +1,19 @@
 {
-  "name": "todo-client",
-  "version": "1.0.0",
-  "description": "",
-  "main": "dev-server.js",
-  "scripts": {
-    "start": "node dev-server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "cores": "^0.8.5",
-    "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "get-arguments-lib": "^1.0.1"
-  }
+    "name": "@mf-demo/todo-client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "dev-server.js",
+    "scripts": {
+        "start": "node dev-server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cores": "^0.8.5",
+        "cors": "^2.8.5",
+        "express": "^4.17.1",
+        "get-arguments-lib": "^1.0.1"
+    }
 }
