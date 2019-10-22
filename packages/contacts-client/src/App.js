@@ -49,13 +49,13 @@ function App() {
     );
 }
 AppContext.provide('contacts.getById', async (uuid) => {
-    const response = await fetch(`/contactß/${uuid}`);
+    const response = await fetch(`/contact/${uuid}`);
     const contact = await response.json();
     return contact;
 })
 
 AppContext.provide('contacts.getByEmail', async (email) => {
-    const response = await fetch(`contact/email/${emai}`);
+    const response = await fetch(`contact/email/${email}`);
     return await response.json();
 })
 
