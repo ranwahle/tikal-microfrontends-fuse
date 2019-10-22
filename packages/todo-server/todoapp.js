@@ -50,6 +50,21 @@ app.post('/', (req, res, next) => {
     }
 });
 
+app.put('/:uuid/assign/:contactuuid', (req, res, next) => {
+    const uuid = req.params.uuid;
+    const contactUuid = req.params.contactuuid;
+    const existingTodo = database.find(lookup => lookup.id === uuid);
+    if (existingTodo) {
+        existingTodo.assigned = contactUuid;
+        writeDatabase();
+        res.status(200).send(existingTodo);
+        return next();
+    }
+    res.status(404);
+    res.send('Could not find todo with id ' + uuid);
+    next(false);
+
+});
 
 app.put('/:uuid/:done', (req, res, next) => {
     const uuid = req.params.uuid;
