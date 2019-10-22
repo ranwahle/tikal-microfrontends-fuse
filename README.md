@@ -11,4 +11,4 @@ $ npx lerna bootstrap
 $ npm start 
 ```
 
-http://localhost:1337
+[Browse Your app](http://localhost:1337)
