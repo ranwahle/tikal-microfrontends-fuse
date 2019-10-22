@@ -44,6 +44,21 @@ app.get('/contact/:uuid', (req, res, next) => {
     }
 });
 
+app.get('/contact/email/:email', (req, res, next) => {
+    const contact = database.results.find(lookup => {
+        return req.params.email === lookup.email;
+    });
+    if (contact) {
+        res.send(contact);
+    } else {
+        res.status(404);
+        res.end();
+        next(false);
+    }
+
+
+})
+
 app.put('/contact/:uuid', (req, res, next) => {
     try {
         const body = req.body || {};

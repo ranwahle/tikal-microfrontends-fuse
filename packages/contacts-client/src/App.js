@@ -1,51 +1,66 @@
-import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {ContactsList} from "./components/ContactsList";
 import {NewContact} from "./components/NewContact";
-import {getContacts, addContact as createContact} from './contactsService';
+import {addContact as createContact, getContacts} from './contactsService';
+import {AppContext} from "microfronts";
+
 function App() {
 
 
     const [contactsList, setContactsList] = useState([]);
-    const [shownObject, setShownObject] = useState('contacts');
+    const [shownObject,     setShownObject] = useState('contacts');
     const addContact = async (contact) => {
         await createContact(contact);
-      fetchContacts(true);
+        fetchContacts(true);
     }
 
-        const fetchContacts = async (override) => {
-            if (!override && contactsList.length) {
-                return;
-            }
-            const contactsResponse = await getContacts();
-            setShownObject('contacts')
-           setContactsList( contactsResponse);
-        };
+    const fetchContacts = async (override) => {
+        if (!override && contactsList.length) {
+            return;
+        }
+        const contactsResponse = await getContacts();
+        setShownObject('contacts')
+        setContactsList(contactsResponse);
+    };
 
-      useEffect(() => {
-          fetchContacts();
-      }, [() => false]);
+    useEffect(() => {
+        fetchContacts();
+    }, [() => false]);
 
 
-  return (
-    <div className="App">
+    return (
+        <div className="App">
 
-        {shownObject === 'newContact' &&
+            {shownObject === 'newContact' &&
             <>
-        <a href="javascript:void(0)" onClick={() => setShownObject('contacts')}>Contacts</a>
-        <NewContact addContact={addContact}/>
-        </>}
+                <a  onClick={() => setShownObject('contacts')}>Contacts</a>
+                <NewContact addContact={addContact}/>
+            </>}
 
-        {shownObject === 'contacts' &&
+            {shownObject === 'contacts' &&
             <>
-                <a href="javascript:void(0)" onClick={() => setShownObject('newContact')}>New contact</a>
+                <a onClick={() => setShownObject('newContact')}>New contact</a>
 
-                <ContactsList contacts={contactsList} />
-        </>}
+                <ContactsList contacts={contactsList}/>
+            </>}
 
-    </div>
-  );
+        </div>
+    );
 }
+AppContext.provide('contacts.getById', async (uuid) => {
+    const response = await fetch(`/contactß/${uuid}`);
+    const contact = await response.json();
+    return contact;
+})
+
+AppContext.provide('contacts.getByEmail', async (email) => {
+    const response = await fetch(`contact/email/${emai}`);
+    return await response.json();
+})
+
+AppContext.provide('contacts.getSelectedContact', () => {
+
+})
 
 export default App;
