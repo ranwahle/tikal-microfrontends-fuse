@@ -1,5 +1,5 @@
 {
-    "name": "contacts",
+    "name": "@mf-demo/contacts-server",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
