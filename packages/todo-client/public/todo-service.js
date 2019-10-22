@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:4000'
+const BASE_URL = 'http://localhost:3006'
 
 export async function getTasks() {
     const response = await fetch(BASE_URL);
@@ -10,8 +10,11 @@ export async function getTasks() {
 
 export async function addTask(task) {
 
-    const reqponse = await fetch(BASE_URL, {method: 'post',
-        headers: {'content-type': 'application/json'}, body: JSON.stringify(task)});
+    const reqponse = await fetch(BASE_URL, {
+        method: 'post',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(task)
+    });
 
 
 }

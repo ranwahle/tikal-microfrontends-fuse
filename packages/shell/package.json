@@ -5,15 +5,15 @@
     "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "node dev-server.js",
+        "start": "http-server -p 1337",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "ISC",
+    "devDependencies": {
+        "http-server": "0.11.1"
+    },
     "dependencies": {
-        "express": "^4.17.1",
-        "express-http-proxy": "^1.6.0",
-        "get-arguments-lib": "^1.0.1",
         "microfronts": "^0.1.1"
     }
 }
